@@ -261,33 +261,16 @@ Transition was completed as a halftone pattern and consists of four versions: C,
     ];
 ;
 
-// --- 5. 이미지 초기화 (모바일 반응형 통합 버전) ---
+// --- 5. 이미지 초기화 ---
 function initImages() {
     if (!imageTrack) return;
     imageTrack.innerHTML = '';
-    
-    // 현재 모바일 환경인지 확인 (너비 768px 이하)
-    const isMobile = window.innerWidth <= 768;
-
     projects.forEach((project, pIdx) => {
         const projectWrapper = document.createElement('div');
         projectWrapper.classList.add('project-wrapper');
 
-        // [모바일 전용] 제목과 카테고리/년도 영역 상단에 추가
-        if (isMobile) {
-            const mobileMeta = document.createElement('div');
-            mobileMeta.className = 'mobile-meta';
-            const cleanYear = project.year.replace(/\*/g, '');
-            mobileMeta.innerHTML = `
-                <div class="mobile-title" style="font-size: 1.8rem; font-weight: bold; margin-bottom: 5px;">${project.title}</div>
-                <div class="mobile-info" style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">${project.category} / ${cleanYear}</div>
-            `;
-            projectWrapper.appendChild(mobileMeta);
-        }
-
-        // PC 전용 배경 처리 (Street 관련 프로젝트)
         const isStreet = ["Iconic Icon", "Illegal Area", "Public Design Walk"].includes(project.title);
-        if (isStreet && !isMobile) {
+        if (isStreet) {
             Object.assign(projectWrapper.style, {
                 backgroundImage: "url('/img/street.svg')",
                 backgroundRepeat: "repeat-x",
@@ -296,7 +279,6 @@ function initImages() {
             });
         }
 
-        // 미디어(이미지/비디오) 생성
         project.media.forEach((src, mIdx) => {
             let el;
             if (src.toLowerCase().endsWith('.mp4')) {
@@ -312,18 +294,7 @@ function initImages() {
             projectWrapper.appendChild(el);
         });
 
-        // [모바일 전용] 이미지 하단에 프로젝트 설명 추가
-        if (isMobile) {
-            const mobileDesc = document.createElement('div');
-            mobileDesc.className = 'mobile-desc';
-            mobileDesc.style.marginTop = '20px';
-            mobileDesc.style.lineHeight = '1.6';
-            mobileDesc.innerHTML = project.desc;
-            projectWrapper.appendChild(mobileDesc);
-        }
-
-        // PC 전용 특수 효과 (No surfing club 스티커)
-        if (project.title === "No surfing club" && !isMobile) {
+        if (project.title === "No surfing club") {
             const overlayContainer = document.createElement('div');
             overlayContainer.classList.add('nsc-overlay-container');
             for (let i = 1; i <= 8; i++) {
@@ -334,7 +305,6 @@ function initImages() {
             }
             projectWrapper.appendChild(overlayContainer);
         }
-        
         imageTrack.appendChild(projectWrapper);
     });
 }
