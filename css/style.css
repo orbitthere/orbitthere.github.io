@@ -1,0 +1,685 @@
+/* /css/style.css */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --magenta-line: #feccff;
+    --line-thickness: 1px;
+    --gutter-width: 0.2%;
+    --column-count: 11;
+    --gutter-count: 12;
+    --column-width: calc((100% - (var(--gutter-count) * var(--gutter-width))) / var(--column-count));
+    --bg-blue: #e1fffb;
+    --bg-green: #edffdc;
+    --bg-yellow: #fdffde;
+    --bg-white: #fff;
+}
+
+@font-face {
+    font-family: 'postsyntax', 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff'),
+    url('/font/postsyntax.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "mr-eaves-modern", 'Pretendard-Regular', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.05rem;
+    letter-spacing: -0.02rem;
+}
+
+.back-shape {
+    position: fixed;
+    top: 4%;
+    left: 2%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 50%;
+}
+
+.grid-container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 1.5% 4.5% auto 1.5% 1.5%;
+    grid-template-columns: repeat(var(--column-count), var(--gutter-width) var(--column-width)) var(--gutter-width);
+}
+
+.grid-cell {
+    position: relative;
+    z-index: 1;
+}
+
+.row-1-cell,
+.row-5-cell {
+    grid-column: 1 / -1;
+}
+
+.row-2,
+.row-4 {
+    grid-column: 1 / -1;
+    display: contents;
+}
+
+.text-cell {
+    padding: 0;
+    padding-left: 6px;
+    line-height: 0.83;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.text-cell:not(.contact-info):hover {
+    background-color: #feccff;
+    color: var(--bg-white) !important;
+    cursor: pointer;
+    z-index: 500;
+}
+
+.cell-2-1 {
+    grid-column: 2 / 3;
+    grid-row: 2;
+}
+
+.cell-2-2 {
+    grid-column: 4 / 5;
+    grid-row: 2;
+}
+
+.cell-2-3 {
+    grid-column: 6 / 7;
+    grid-row: 2;
+}
+
+.cell-2-8 {
+    grid-column: 18 / 19;
+    grid-row: 2;
+    font-weight: 300;
+    font-size: 1.05rem;
+    
+    /* 🌟 중요: 아래 두 줄을 추가하여 이미지가 잘리지 않게 하고 기준을 잡습니다 */
+    overflow: visible !important; 
+    position: relative; 
+}
+
+.contact-info {
+    grid-column: 14 / 17;
+    grid-row: 2;
+    font-size: 1.05rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info a {
+    display: block;
+}
+
+.designer-name {
+    grid-column: 18 / 19;
+    grid-row: 2;
+    font-weight: 300;
+    font-size: 1.05rem;
+}
+
+.cell-4-1 {
+    grid-column: 2 / 3;
+    grid-row: 4;
+}
+
+.cell-4-2 {
+    grid-column: 4 / 5;
+    grid-row: 4;
+}
+
+.cell-4-3 {
+    grid-column: 6 / 7;
+    grid-row: 4;
+}
+
+.cell-4-9 {
+    grid-column: 18 / 19;
+    grid-row: 4;
+}
+
+.main-content {
+    grid-row: 3;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: inherit;
+    position: relative;
+    z-index: 1;
+    background-color: var(--bg-yellow);
+}
+
+.main-content::before {
+    content: '';
+    grid-column: 2 / 7;
+    grid-row: 1 / -1;
+    background-color: var(--bg-blue);
+    position: relative;
+    z-index: -2;
+}
+
+.main-content::after {
+    content: '';
+    grid-column: 8 / 17;
+    grid-row: 1 / -1;
+    background-color: var(--bg-green);
+    position: relative;
+    z-index: 0;
+}
+
+.project-info-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    z-index: 300;
+    pointer-events: none;
+}
+
+.project-info-container.col-1::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13;
+    width: var(--three-col-total-width, 27%);
+    height: 70%;
+    background-color: var(--bg-white);
+    z-index: -1;
+}
+
+.project-title,
+.project-category,
+.project-year {
+    font-size: 0.9rem;
+    padding-left: 6px;
+    white-space: nowrap;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        color: var(--black-line);
+    }
+
+    50% {
+        color: var(--magenta-line);
+        text-shadow: 0 0 5px var(--magenta-line);
+    }
+}
+
+.title-flash {
+    animation: twinkle 0.6s ease-in-out;
+}
+
+.project-title {
+    font-weight: bold;
+    font-family: "mrs-eaves-xl-serif-narrow", serif;
+}
+
+.project-category,
+.project-year {
+    font-family: "mrs-eaves-xl-serif-narrow", serif;
+}
+
+/* 🌟 링크 심볼 스타일 수정 */
+.project-link-symbol {
+    position: absolute;
+    bottom: 125%; /* 타이틀 위쪽 배치 */
+    left: 6px;
+    width: 22px;
+    height: 22px;
+    
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    cursor: pointer;
+    pointer-events: auto;
+    display: none;
+    z-index: 310;
+    animation: link-glow 1.5s infinite ease-in-out;
+}
+
+@keyframes link-glow {
+    0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 5px var(--magenta-line); }
+    50% { transform: scale(1.2); opacity: 0.7; box-shadow: 0 0 15px var(--magenta-line); }
+}
+
+.project-link-symbol::after {
+    content: attr(data-message);
+    
+    bottom: 120%;
+    width: 10px;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    color: #3f3f3f;
+    border: 0.4px solid #3f3f3f;
+    padding: 3px 6px;
+    font-size: 0.75rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+    z-index: 9999;
+
+    white-space: nowrap;
+    word-break: keep-all;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.project-link-symbol:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.img-scroll-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+}
+
+.img-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.image-track {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    width: fit-content;
+}
+
+.project-image {
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.6s ease, filter 0.6s ease;
+    transform: scale(0.85);
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+
+.project-image.focused {
+    transform: scale(1);
+    opacity: 1;
+    filter: grayscale(0%);
+    z-index: 250;
+}
+
+/* 🌟 그리드 선의 z-index를 10으로 낮춤 */
+.grid-lines-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 50%;
+}
+
+.slogan-container {
+    grid-row: 2;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    z-index: 350;
+}
+
+.slogan-container.col-4 {
+    grid-column: 8 / 11;
+}
+
+.slogan-container.col-5 {
+    grid-column: 10 / 11;
+}
+
+.slogan-container.col-6 {
+    grid-column: 12 / 13;
+}
+
+/* 🌟 슬로건 아이템 z-index를 그리드 선(10)보다 높은 50으로 설정 */
+.circular-slogan-item {
+    border-radius: 50%;
+    background-color: var(--bg-white);
+    border: var(--line-thickness) solid var(--magenta-line);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+    position: absolute;
+    color: #feccff;
+    z-index: 50;
+
+    font-family: 'postsyntax';
+
+    padding-top: 7px; /* 글자를 아래로 살짝 밀어줌 */
+}
+
+.circular-slogan-item:hover {
+    background-color: #feccff;
+    color: var(--bg-white) !important;
+    cursor: pointer;
+    z-index: 500;
+}
+
+/* 🌟 버튼 z-index를 그리드 선(10)보다 훨씬 높은 400 유지 */
+.circular-button {
+    position: absolute;
+    z-index: 400;
+    border-radius: 50%;
+    background-color: var(--bg-white);
+    border: var(--line-thickness) solid var(--magenta-line);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 3.3rem;
+}
+
+.circular-button-item {
+    all: unset;
+    position: static;
+    display: block;
+    color: white;
+    -webkit-text-stroke: 1px #feccff;
+}
+
+.arrow {
+    width: 70px;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+.project-description-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 90%;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    pointer-events: auto;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.project-description-container::-webkit-scrollbar {
+    display: none;
+}
+
+.ko-text {
+    font-size: 0.79rem;
+    line-height: 1.62;
+}
+
+.description-text {
+    font-family: "mrs-eaves-xl-serif-narrow", "Pretendard-Regular", serif;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    color: #000;
+    padding-left: 6px;
+    padding-right: 10px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: #feccff; opacity: 0.93;
+
+    white-space: pre-wrap; /* 🌟 이 속성이 있어야 \n 이나 백틱의 줄바꿈이 화면에 나타납니다 */
+    word-break: keep-all;
+}
+
+.button-col-6-1,
+.button-col-6-2,
+.cell-2-1,
+.cell-2-2,
+.cell-2-3 {
+    cursor: default !important;
+}
+
+.cell-2-1,
+.cell-2-2,
+.cell-2-3 {
+    overflow: visible !important;
+}
+
+.button-col-6-1::after,
+.button-col-6-2::after,
+.cell-2-1::after,
+.cell-2-2::after,
+.cell-2-3::after {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    color: #3f3f3f;
+    border: 0.4px solid #3f3f3f;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.1s ease;
+    z-index: 9999;
+}
+
+.button-col-6-1::after,
+.button-col-6-2::after {
+    content: "no function";
+    bottom: 110%;
+}
+
+.cell-2-1::after {
+    content: "1) graphic + digital, poster, book, and every printed media.";
+    top: 110%;
+    width: 120px;
+    white-space: normal;
+    word-break: keep-all;
+    text-align: center;
+
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+}
+
+.cell-2-2::after {
+    content: "2) all projects on this website are personal projects.";
+    top: 110%;
+    width: 120px;
+    white-space: normal;
+    word-break: keep-all;
+    text-align: center;
+
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+}
+
+.cell-2-3::after {
+    content: "3) i'm an independent designer, similar to an “independent musician,” who forges an original path in the underground scene based on personal preferences.";
+    top: 110%;
+    width: 120px;
+    white-space: normal;
+    word-break: keep-all;
+    text-align: center;
+
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+}
+
+.cell-2-8::after {
+    content: ""; 
+    background-image: url('/img/profile.svg'); 
+    background-size: cover;
+    background-position: center;
+
+    position: absolute;
+    left: 50%;
+    top: 110%; /* 글자 바로 아래 */
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border: 0.4px solid #feccff;
+    
+    width: 100px; 
+    height: 100px; 
+    
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    z-index: 10000; /* 🌟 다른 그리드 라인보다 위에 오도록 높게 설정 */
+    pointer-events: none;
+}
+
+.button-col-6-1:hover::after,
+.button-col-6-2:hover::after,
+.cell-2-1:hover::after,
+.cell-2-2:hover::after,
+.cell-2-3:hover::after,
+.cell-2-8:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 프로젝트 래퍼: 이미지들이 가로로 길게 배치됨 */
+.project-wrapper {
+    position: relative;
+    display: flex;
+    height: 100%;
+}
+
+/* 🌟 오버레이 컨테이너: 이미지 1~3번을 모두 덮는 긴 유령 레이어 */
+.nsc-overlay-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* 부모(project-wrapper)인 이미지 3개 합산 너비를 100%로 인식 */
+    height: 100%;
+    pointer-events: none;
+    z-index: 500;
+}
+
+/* 스티커 공통 스타일 */
+.nsc-random-img {
+    position: absolute; /* 컨테이너 내부에서 좌표로 배치 */
+    display: block;
+    object-fit: contain;
+    z-index: 510;
+    opacity: 80%;
+
+    transition: opacity 0.8s ease; 
+    pointer-events: auto;
+}
+
+/* 🌟 개별 조절 구간: left 값을 0% ~ 100% 사이로 넓게 분산시키세요 */
+/* 0%~30%는 1번 이미지 위, 35%~65%는 2번 이미지 위, 70%~100%는 3번 이미지 위입니다. */
+
+.nsc-random-img.img-1 { width: 115px; top: 6%; left: 1%;   transform: rotate(-20deg);}
+.nsc-random-img.img-2 { width: 160px; top: 68%; left: 19%;  transform: rotate(17deg);}
+.nsc-random-img.img-3 { width: 150px; top: 9%; left: 32%;  transform: rotate(-9deg);}
+.nsc-random-img.img-4 { width: 100px; top: 49%; left: 48%;  transform: rotate(-20deg);}
+.nsc-random-img.img-5 { width: 380px; top: 93%; left: 44%;  transform: rotate(-12deg);}
+.nsc-random-img.img-6 { width: 310px;  top: 15%; left: 65%;  transform: rotate(30deg);}
+.nsc-random-img.img-7 { width: 170px;  top: 79%; left: -6%;  transform: rotate(20deg);}
+.nsc-random-img.img-8 { width: 170px;  top: 70%; left: 78%;  transform: rotate(20deg);}
+
+.project-image.focused + .nsc-overlay-container .nsc-random-img {
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
+}
+
+.project-image:not(.focused) + .nsc-overlay-container {
+    opacity: 0.3;
+    filter: grayscale(100%);
+    transition: all 0.6s ease;
+}
+
+.nsc-random-img:hover {
+    opacity: 0;
+}
+
+/* 🌟 메뉴 오버레이 (모달) 스타일 추가 */
+.menu-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(254, 204, 255, 0.4); 
+    display: none; /* JS에서 flex로 변경 */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    /* 전체 폰트 강제 지정 */
+    font-family: "mrs-eaves-xl-serif-narrow", serif !important; 
+    font-size: 0.9rem;
+}
+
+.menu-content {
+    width: 70%;
+    height: 70%;
+    background-color: #fff;
+    position: relative;
+    padding: 20px; /* 여백 확보 */
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.menu-item {
+    display: grid;
+    grid-template-columns: 2fr 0.5fr 0.5fr;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--magenta-line);
+
+    transition: background-color; /* 0.2s ease, color 0.2s ease; 부드러운 전환 효과 */
+    padding: 5px 50px; /* 좌우 패딩을 살짝 주어 색상이 글자에 붙지 않게 함 */
+}
+
+/* 마우스를 올렸을 때 행 전체 효과 */
+.menu-item:hover {
+    background-color: var(--magenta-line);
+}
+
+/* 마우스를 올렸을 때 내부의 모든 글자색을 흰색으로 변경 */
+.menu-item:hover .m-title,
+.menu-item:hover .m-category,
+.menu-item:hover .m-year {
+    color: #ffffff !important;
+}
