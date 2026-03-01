@@ -287,13 +287,18 @@ function initImages() {
             // [분기 1] Vimeo 링크인 경우
             if (src.includes("player.vimeo.com") || src.includes("vimeo.com")) {
                 el = document.createElement('iframe');
-                // 자동재생 및 최적화 파라미터 추가
-                const vimeoSrc = src.includes('?') ? `${src}&autoplay=1&muted=1&loop=1` : `${src}?autoplay=1&muted=1&loop=1`;
+                
+                // 핵심: background=1 (컨트롤 숨김+자동재생+루프), muted=1, autoplay=1
+                const vimeoSrc = src.includes('?') 
+                    ? `${src}&autoplay=1&muted=1&loop=1&background=1` 
+                    : `${src}?autoplay=1&muted=1&loop=1&background=1`;
+                    
                 el.src = vimeoSrc;
                 el.setAttribute('frameborder', '0');
-                el.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
-                el.style.aspectRatio = "16 / 9"; // 영상 비율에 맞춰 조절 가능
-            } 
+                el.setAttribute('allow', 'autoplay; fullscreen'); // 자동재생 권한 부여
+                el.style.aspectRatio = "16 / 9"; 
+                el.classList.add('project-image');
+            }
             // [분기 2] 직접 업로드한 .mp4 파일인 경우
             else if (src.toLowerCase().endsWith('.mp4')) {
                 el = document.createElement('video');
