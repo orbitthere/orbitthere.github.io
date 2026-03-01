@@ -243,25 +243,19 @@ Transition was completed as a halftone pattern and consists of four versions: C,
 <span class="ko-text">디지털 환경에서는 모든 평면 이미지가 곧바로 질감이 될 수 있다는 점에 착안하여 탐구를 시작했다. 자연환경에서 재현할 수 없는 6가지 질감을 주제로 촉각을 자극하는 형태를 생성했다.</span>
 `,
             media: ["/img/fft/fft_1.png", "/img/fft/fft_2.png", "/img/fft/fft_3.png", "/img/fft/fft_4.png"],
-            link: "fft.html",
-            icon: "/img/icon/fft_icon.svg",
-            linkMsg: "test"
         },
         {
             title: "Spaceship",
             category: "personal project, poster",
             year: "2025",
-            desc: `Search *Gila - Spaceship*`,
-            media: ["/img/spaceship/spaceship_1.png", "/img/spaceship/spaceship_2.png", "/img/spaceship/spaceship_3.png"],
-            link: "https://youtu.be/pxqXjfng9Pk?si=ylI2wSqP7CQukQLy",
-            icon: "/img/icon/spaceship_icon.svg",
-            linkMsg: "go"
+            desc: `(~˘▾˘)~ ♥ ~(˘▾˘~)`,
+            media: ["/img/spaceship/spaceship_1.png", "/img/spaceship/spaceship_2.png", "/img/spaceship/spaceship_3.png"]
         },
         {
             title: "Flip & Ollie",
             category: "personal project, postcard",
             year: "2024",
-            desc: `Why is youth culture so cooooooool?`,
+            desc: `Why is youth culture so cool?`,
             media: ["/img/ollie/ollie_1.png", "/img/ollie/ollie_2.png", "/img/ollie/ollie_3.png"]
         },
     ];
