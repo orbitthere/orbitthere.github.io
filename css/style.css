@@ -548,7 +548,7 @@ a {
 
 .cell-2-8::after {
     content: ""; 
-    background-image: url('https://github.com/user-attachments/assets/d4d312f5-0b80-41f7-84ee-97c80b13b039'); 
+    background-image: url('/img/profile.svg'); 
     background-size: cover;
     background-position: center;
 
