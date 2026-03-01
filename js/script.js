@@ -122,7 +122,7 @@ As a designer who produces content firsthand, I see No Surfing Club as an experi
 <span class="ko-text">1) 개성적인 스타일로 유명해지거나 2) 클럽 관계자인 지인을 통해서가 아니면 클럽의 포스터 수주를 받기는 힘들므로, 스스로 클럽을 운영하기로 했다. No surfing club이 제공하는 콘텐츠는 하이퍼큐브 속에서 변화하는 서체 Transition의 개별 글자를 보여주는 라이브 공연 포스터다. 현재는 한발 나아가 “차원”과 “변화”라는 폭넓은 컨셉을 가지고 포스터를 제작하고 있다. 위계 없음, 정제 없음, 읽을 수 없는 글자와 날 것의 그래픽을 선보이는 음지의 양식이라면 뭐든 사용하며, 유행하는 양식을 따라 그래픽 컨셉은 계속 달라진다.</span>
         
 <span class="ko-text">이 프로젝트는 콘텐츠를 직접 생산하는 독립 디자이너로서 자생 방안을 찾는 실험이기도 하다.</span>`,
-            media: ["/img/nsc/nsc_01.mp4", "/img/nsc/nsc_02.mp4", "/img/nsc/nsc_03.mp4"],
+            media: ["https://player.vimeo.com/video/1169303778?badge=0&autopause=0&player_id=0&app_id=58479", "https://player.vimeo.com/video/1169303797?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479", "https://player.vimeo.com/video/1169303825?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"],
             link: "https://www.instagram.com/no.surfingclub",
             icon: "/img/icon/nsc_icon.svg",
             linkMsg: "sns"
@@ -142,7 +142,7 @@ As a designer who produces content firsthand, I see No Surfing Club as an experi
 <span class="ko-text">Soul Digital은 가상의 걸그룹의 공식 인스타그램 계정을 운영하는 프로젝트다.</span>
        
 <span class="ko-text">점점 내용이 없는 피상적인 스타일에 빠지며, 자가 복제와 카피의 가속화에 제동을 걸지 못하는 케이팝 업계의 디자인에 문제를 제기하고자 시작했다. 인터넷에 떠도는 밈을 변형한 티징 이미지, 생성형 AI 툴을 사용해서 만든 멤버들의 프로필, 대량 생산된 후 무분별하게 버려질 것을 숨기지 않는 앨범 패키징 이미지 등 케이팝 산업 내의 콘텐츠를 활용하여 냉소적인 이미지를 만들고 있다.</span>`,
-            media: ["/img/souldigital/souldigital_1.png", "/img/souldigital/souldigital_2.png", "/img/souldigital/souldigital_3.mp4", "/img/souldigital/souldigital_4.png", "/img/souldigital/souldigital_5.png"],
+            media: ["/img/souldigital/souldigital_1.png", "/img/souldigital/souldigital_2.png", "https://player.vimeo.com/video/1169305293?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479", "/img/souldigital/souldigital_4.png", "/img/souldigital/souldigital_5.png"],
             link: "https://www.instagram.com/souldigital.official",
             icon: "/img/icon/souldigital_icon.svg",
             linkMsg: "sns"
@@ -261,14 +261,16 @@ Transition was completed as a halftone pattern and consists of four versions: C,
     ];
 ;
 
-// --- 5. 이미지 초기화 ---
+// --- 5. 이미지/영상/Vimeo 초기화 ---
 function initImages() {
     if (!imageTrack) return;
     imageTrack.innerHTML = '';
+    
     projects.forEach((project, pIdx) => {
         const projectWrapper = document.createElement('div');
         projectWrapper.classList.add('project-wrapper');
 
+        // PC 전용 배경 효과 (기존 로직 유지)
         const isStreet = ["Iconic Icon", "Illegal Area", "Public Design Walk"].includes(project.title);
         if (isStreet) {
             Object.assign(projectWrapper.style, {
@@ -281,19 +283,39 @@ function initImages() {
 
         project.media.forEach((src, mIdx) => {
             let el;
-            if (src.toLowerCase().endsWith('.mp4')) {
+            
+            // [분기 1] Vimeo 링크인 경우
+            if (src.includes("player.vimeo.com") || src.includes("vimeo.com")) {
+                el = document.createElement('iframe');
+                // 자동재생 및 최적화 파라미터 추가
+                const vimeoSrc = src.includes('?') ? `${src}&autoplay=1&muted=1&loop=1` : `${src}?autoplay=1&muted=1&loop=1`;
+                el.src = vimeoSrc;
+                el.setAttribute('frameborder', '0');
+                el.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+                el.style.aspectRatio = "16 / 9"; // 영상 비율에 맞춰 조절 가능
+            } 
+            // [분기 2] 직접 업로드한 .mp4 파일인 경우
+            else if (src.toLowerCase().endsWith('.mp4')) {
                 el = document.createElement('video');
-                el.src = src; el.autoplay = true; el.muted = true; el.loop = true; el.playsInline = true;
-            } else {
+                el.src = src; 
+                el.autoplay = true; 
+                el.muted = true; 
+                el.loop = true; 
+                el.playsInline = true;
+            } 
+            // [분기 3] 일반 이미지인 경우
+            else {
                 el = document.createElement('img');
                 el.src = src;
             }
+
             el.classList.add('project-image');
             el.dataset.projectIdx = pIdx;
             el.dataset.isLastInProject = (mIdx === project.media.length - 1);
             projectWrapper.appendChild(el);
         });
 
+        // NSC 스티커 오버레이 로직 (기존 로직 유지)
         if (project.title === "No surfing club") {
             const overlayContainer = document.createElement('div');
             overlayContainer.classList.add('nsc-overlay-container');
