@@ -20,12 +20,10 @@
 }
 
 @font-face {
-    font-family: 'postsyntax', 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff'),
-    url('/font/postsyntax.otf') format('opentype');
+    font-family: 'postsyntax-font'; 
+    src: url('/font/postsyntax.otf') format('opentype');
     font-weight: 300;
     font-style: normal;
-    unicode-range: U+1100-11FF, U+3130-318F, U+AC00-D7AF;
 }
 
 html,
@@ -36,7 +34,7 @@ body {
 }
 
 body {
-    font-family: "mr-eaves-modern", 'Pretendard-Regular', sans-serif;
+    font-family: "mr-eaves-modern", "Pretendard", sans-serif;
     font-weight: 300;
     font-style: normal;
     font-size: 1.05rem;
@@ -455,7 +453,7 @@ a {
 }
 
 .description-text {
-    font-family: "mrs-eaves-xl-serif-narrow", "Pretendard-Regular", serif;
+    font-family: "mrs-eaves-xl-serif-narrow", "Pretendard", serif;
     font-size: 0.85rem;
     line-height: 1.3;
     color: #000;
