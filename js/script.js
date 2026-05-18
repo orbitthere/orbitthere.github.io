@@ -218,7 +218,7 @@ Transition was completed as a halftone pattern and consists of four versions: C,
             title: "Flip & Ollie",
             category: "personal project, postcard",
             year: "2024",
-            desc: `Why is youth culture so cool?`,
+            desc: `(~˘▾˘)~ ♥ ~(˘▾˘~)`,
             media: ["/img/ollie/ollie_1.png", "/img/ollie/ollie_2.png", "/img/ollie/ollie_3.png"]
         },
     ];
