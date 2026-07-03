@@ -20,7 +20,7 @@
 }
 
 @font-face {
-    font-family: 'postsyntax-font'; 
+    font-family: 'postsyntax-font';
     src: url('/font/postsyntax.otf') format('opentype');
     font-weight: 300;
     font-style: normal;
@@ -75,8 +75,7 @@ body {
 }
 
 .text-cell {
-    padding: 0;
-    padding-left: 6px;
+    padding: 0 0 0 6px;
     line-height: 0.83;
     overflow: hidden;
     display: flex;
@@ -107,17 +106,6 @@ body {
     grid-row: 2;
 }
 
-.cell-2-8 {
-    grid-column: 18 / 19;
-    grid-row: 2;
-    font-weight: 300;
-    font-size: 1.05rem;
-    
-    /* 🌟 중요: 아래 두 줄을 추가하여 이미지가 잘리지 않게 하고 기준을 잡습니다 */
-    overflow: visible !important; 
-    position: relative; 
-}
-
 .contact-info {
     grid-column: 14 / 17;
     grid-row: 2;
@@ -130,11 +118,15 @@ body {
     display: block;
 }
 
-.designer-name {
+.designer-name,
+.cell-2-8 {
     grid-column: 18 / 19;
     grid-row: 2;
     font-weight: 300;
     font-size: 1.05rem;
+
+    overflow: visible !important;
+    position: relative;
 }
 
 .cell-4-1 {
@@ -200,7 +192,7 @@ body {
     content: '';
     position: absolute;
     left: 0;
-    top: 13;
+    top: 13%;
     width: var(--three-col-total-width, 27%);
     height: 70%;
     background-color: var(--bg-white);
@@ -210,9 +202,14 @@ body {
 .project-title,
 .project-category,
 .project-year {
+    font-family: "mrs-eaves-xl-serif-narrow", serif;
     font-size: 0.9rem;
     padding-left: 6px;
     white-space: nowrap;
+}
+
+.project-title {
+    font-weight: bold;
 }
 
 @keyframes twinkle {
@@ -232,24 +229,13 @@ body {
     animation: twinkle 0.6s ease-in-out;
 }
 
-.project-title {
-    font-weight: bold;
-    font-family: "mrs-eaves-xl-serif-narrow", serif;
-}
-
-.project-category,
-.project-year {
-    font-family: "mrs-eaves-xl-serif-narrow", serif;
-}
-
-/* 🌟 링크 심볼 스타일 수정 */
 .project-link-symbol {
     position: absolute;
-    bottom: 125%; /* 타이틀 위쪽 배치 */
+    bottom: 125%;
     left: 6px;
     width: 22px;
     height: 22px;
-    
+
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -262,13 +248,24 @@ body {
 }
 
 @keyframes link-glow {
-    0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 5px var(--magenta-line); }
-    50% { transform: scale(1.2); opacity: 0.7; box-shadow: 0 0 15px var(--magenta-line); }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 5px var(--magenta-line);
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+        box-shadow: 0 0 15px var(--magenta-line);
+    }
 }
 
 .project-link-symbol::after {
     content: attr(data-message);
-    
+
     bottom: 120%;
     width: 10px;
 
@@ -340,7 +337,6 @@ body {
     z-index: 250;
 }
 
-/* 🌟 그리드 선의 z-index를 10으로 낮춤 */
 .grid-lines-overlay {
     position: absolute;
     top: 0;
@@ -372,7 +368,6 @@ body {
     grid-column: 12 / 13;
 }
 
-/* 🌟 슬로건 아이템 z-index를 그리드 선(10)보다 높은 50으로 설정 */
 .circular-slogan-item {
     border-radius: 50%;
     background-color: var(--bg-white);
@@ -386,9 +381,9 @@ body {
     color: #feccff;
     z-index: 50;
 
-    font-family: 'postsyntax';
+    font-family: 'postsyntax-font';
 
-    padding-top: 7px; /* 글자를 아래로 살짝 밀어줌 */
+    padding-top: 7px;
 }
 
 .circular-slogan-item:hover {
@@ -398,7 +393,82 @@ body {
     z-index: 500;
 }
 
-/* 🌟 버튼 z-index를 그리드 선(10)보다 훨씬 높은 400 유지 */
+/* 1. 6개 슬로건 버튼의 이미지 팝업 공통 스타일 정의 */
+.circular-slogan-item::after {
+    content: "";
+    background-size: cover;
+    background-position: center;
+
+    position: absolute;
+    left: 50%;
+    top: 107%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border: 0.4px solid #feccff;
+
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+/* 2. 각 버튼 순서에 맞게 개별 이미지(image1~6) 매칭 */
+.slogan-container.col-4 .circular-slogan-item:nth-child(1)::after {
+    background-image: url('/img/postsyntax/postsyntax_icons_1.svg');
+
+    width: 60px;
+    height: 60px;
+}
+
+.slogan-container.col-4 .circular-slogan-item:nth-child(2)::after {
+    background-image: url('/img/postsyntax/postsyntax_icons_2.svg');
+
+    width: 90px;
+    height: 90px;
+}
+
+.slogan-container.col-5 .circular-slogan-item:nth-child(1)::after {
+    background-image: url('/img/postsyntax/postsyntax_icons_3.svg');
+
+    width: 102px;
+    height: 60px;
+}
+
+.slogan-container.col-5 .circular-slogan-item:nth-child(2)::after {
+    background-image: url('/img/postsyntax/postsyntax_icons_4.svg');
+
+    width: 60px;
+    height: 60px;
+}
+
+.slogan-container.col-6 .circular-slogan-item:nth-child(1)::after {
+    background-image: url('/img/postsyntax/postsyntax_icons_5.jpg');
+
+    width: 80px;
+    height: 80px;
+}
+
+.slogan-container.col-6 .circular-slogan-item:nth-child(2)::after {
+    background-image: url('/img/postsyntax/postsyntax_icons_6.jpg');
+
+    width: 180px;
+    height: 60px;
+}
+
+/* 3. 호버 시 노출 처리 (기존 툴팁 호버 그룹에 .circular-slogan-item:hover::after 추가) */
+.button-col-6-1:hover::after,
+.button-col-6-2:hover::after,
+.cell-2-1:hover::after,
+.cell-2-2:hover::after,
+.cell-2-3:hover::after,
+.cell-2-8:hover::after,
+.circular-slogan-item:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
 .circular-button {
     position: absolute;
     z-index: 400;
@@ -457,13 +527,11 @@ a {
     font-size: 0.85rem;
     line-height: 1.3;
     color: #000;
-    padding-left: 6px;
-    padding-right: 10px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    background-color: #feccff; opacity: 0.93;
+    padding: 25px 10px 25px 6px;
+    background-color: #feccff;
+    opacity: 0.93;
 
-    white-space: pre-wrap; /* 🌟 이 속성이 있어야 \n 이나 백틱의 줄바꿈이 화면에 나타납니다 */
+    white-space: pre-wrap;
     word-break: keep-all;
 }
 
@@ -545,26 +613,26 @@ a {
 }
 
 .cell-2-8::after {
-    content: ""; 
-    background-image: url('/img/profile.svg'); 
+    content: "";
+    background-image: url('/img/profile.svg');
     background-size: cover;
     background-position: center;
 
     position: absolute;
     left: 50%;
-    top: 110%; /* 글자 바로 아래 */
+    top: 110%;
     transform: translateX(-50%);
     background-color: #ffffff;
     border: 0.4px solid #feccff;
-    
-    width: 100px; 
-    height: 100px; 
-    
+
+    width: 100px;
+    height: 100px;
+
     display: block;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s ease;
-    z-index: 10000; /* 🌟 다른 그리드 라인보다 위에 오도록 높게 설정 */
+    z-index: 10000;
     pointer-events: none;
 }
 
@@ -578,53 +646,93 @@ a {
     visibility: visible;
 }
 
-/* 프로젝트 래퍼: 이미지들이 가로로 길게 배치됨 */
 .project-wrapper {
     position: relative;
     display: flex;
     height: 100%;
 }
 
-/* 🌟 오버레이 컨테이너: 이미지 1~3번을 모두 덮는 긴 유령 레이어 */
 .nsc-overlay-container {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* 부모(project-wrapper)인 이미지 3개 합산 너비를 100%로 인식 */
+    width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 500;
 }
 
-/* 스티커 공통 스타일 */
 .nsc-random-img {
-    position: absolute; /* 컨테이너 내부에서 좌표로 배치 */
+    position: absolute;
     display: block;
     object-fit: contain;
     z-index: 510;
     opacity: 80%;
-
-    transition: opacity 0.8s ease; 
+    transition: opacity 0.8s ease;
     pointer-events: auto;
 }
 
-/* 🌟 개별 조절 구간: left 값을 0% ~ 100% 사이로 넓게 분산시키세요 */
-/* 0%~30%는 1번 이미지 위, 35%~65%는 2번 이미지 위, 70%~100%는 3번 이미지 위입니다. */
-
-.nsc-random-img.img-1 { width: 115px; top: 6%; left: 1%;   transform: rotate(-20deg);}
-.nsc-random-img.img-2 { width: 160px; top: 68%; left: 19%;  transform: rotate(17deg);}
-.nsc-random-img.img-3 { width: 150px; top: 9%; left: 32%;  transform: rotate(-9deg);}
-.nsc-random-img.img-4 { width: 100px; top: 49%; left: 48%;  transform: rotate(-20deg);}
-.nsc-random-img.img-5 { width: 380px; top: 93%; left: 44%;  transform: rotate(-12deg);}
-.nsc-random-img.img-6 { width: 310px;  top: 15%; left: 65%;  transform: rotate(30deg);}
-.nsc-random-img.img-7 { width: 170px;  top: 79%; left: -6%;  transform: rotate(20deg);}
-.nsc-random-img.img-8 { width: 170px;  top: 70%; left: 78%;  transform: rotate(20deg);}
-
-.project-image.focused + .nsc-overlay-container .nsc-random-img {
-    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
+.nsc-random-img.img-1 {
+    width: 115px;
+    top: 6%;
+    left: 1%;
+    transform: rotate(-20deg);
 }
 
-.project-image:not(.focused) + .nsc-overlay-container {
+.nsc-random-img.img-2 {
+    width: 160px;
+    top: 68%;
+    left: 19%;
+    transform: rotate(17deg);
+}
+
+.nsc-random-img.img-3 {
+    width: 150px;
+    top: 9%;
+    left: 32%;
+    transform: rotate(-9deg);
+}
+
+.nsc-random-img.img-4 {
+    width: 100px;
+    top: 49%;
+    left: 48%;
+    transform: rotate(-20deg);
+}
+
+.nsc-random-img.img-5 {
+    width: 380px;
+    top: 93%;
+    left: 44%;
+    transform: rotate(-12deg);
+}
+
+.nsc-random-img.img-6 {
+    width: 310px;
+    top: 15%;
+    left: 65%;
+    transform: rotate(30deg);
+}
+
+.nsc-random-img.img-7 {
+    width: 170px;
+    top: 79%;
+    left: -6%;
+    transform: rotate(20deg);
+}
+
+.nsc-random-img.img-8 {
+    width: 170px;
+    top: 70%;
+    left: 78%;
+    transform: rotate(20deg);
+}
+
+.project-image.focused+.nsc-overlay-container .nsc-random-img {
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
+}
+
+.project-image:not(.focused)+.nsc-overlay-container {
     opacity: 0.3;
     filter: grayscale(100%);
     transition: all 0.6s ease;
@@ -634,18 +742,18 @@ a {
     opacity: 0;
 }
 
-/* 🌟 메뉴 오버레이 (모달) 스타일 추가 */
 .menu-overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(254, 204, 255, 0.4); 
-    display: none; /* JS에서 flex로 변경 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(254, 204, 255, 0.4);
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    /* 전체 폰트 강제 지정 */
-    font-family: "mrs-eaves-xl-serif-narrow", serif !important; 
+    font-family: "mrs-eaves-xl-serif-narrow", serif !important;
     font-size: 0.9rem;
 }
 
@@ -654,84 +762,343 @@ a {
     height: 70%;
     background-color: #fff;
     position: relative;
-    padding: 20px; /* 여백 확보 */
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+}
+
+.menu-close {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    position: absolute;
+    top: 20px;
+    right: 70px;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--magenta-line);
+    font-family: inherit;
+}
+
+.menu-project-list {
+    margin-top: 40px;
+    overflow-y: auto;
 }
 
 .menu-item {
     display: grid;
     grid-template-columns: 2fr 0.5fr 0.5fr;
-    padding: 8px 0;
     border-bottom: 1px solid var(--magenta-line);
-
-    transition: background-color; /* 0.2s ease, color 0.2s ease; 부드러운 전환 효과 */
-    padding: 5px 50px; /* 좌우 패딩을 살짝 주어 색상이 글자에 붙지 않게 함 */
+    padding: 5px 50px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* 마우스를 올렸을 때 행 전체 효과 */
+.menu-item .m-title {
+    font-weight: bold;
+}
+
+.menu-item .m-year {
+    text-align: right;
+}
+
 .menu-item:hover {
     background-color: var(--magenta-line);
 }
 
-/* 마우스를 올렸을 때 내부의 모든 글자색을 흰색으로 변경 */
 .menu-item:hover .m-title,
 .menu-item:hover .m-category,
 .menu-item:hover .m-year {
     color: #ffffff !important;
 }
 
-/* --- 모바일 차단 팝업 (카드 스타일) --- */
-#pc-only-overlay {
+/* 260603 codex가 작성한 mobile */
+
+.mobile-project-feed {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(254, 204, 255, 0.4); /* 은은한 회색 배경 */
-    z-index: 999999;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-
-    font-family: "mrs-eaves-xl-serif-narrow", serif; 
 }
 
-.pc-only-card {
-    background-color: #feccff;
-    padding: 40px 30px;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
-}
-
-.pc-only-card a {
-    background-color: #ffffff;
-}
-
-.main-text {
-    font-size: 1rem;
-    line-height: 1.1;
-    color: #333;
-    margin-bottom: 25px;
-    word-break: keep-all;
-}
-
-.rat {
-    width: 100px;
-}
-
-/* 모바일 화면에서 활성화 */
 @media screen and (max-width: 768px) {
-    #pc-only-overlay {
-        display: flex;
-    }
+
+    html,
     body {
-        overflow: hidden !important;
-        position: fixed;
-        width: 100%;
+        height: auto;
+        min-height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-color: #fff;
     }
+
+    body {
+        position: static;
+        width: 100%;
+        background-color: #fff;
+        color: #000;
+        font-size: 1rem;
+        letter-spacing: -0.02rem;
+    }
+
+    .grid-container {
+        display: block;
+        width: 100%;
+        min-height: 100dvh;
+        height: auto;
+        background-color: #fff;
+    }
+
+    .grid-lines-overlay,
+    .row-1-cell,
+    .row-5-cell,
+    .row-2,
+    .row-4,
+    .back-shape,
+    .project-info-container,
+    .project-description-container,
+    .img-scroll-wrapper,
+    .circular-button,
+    .main-content::before,
+    .main-content::after {
+        display: none !important;
+    }
+
+    .main-content {
+        display: block;
+        min-height: 100dvh;
+        background-color: #fff;
+    }
+
+    .mobile-project-feed {
+        display: block;
+        width: 100%;
+        background-color: #fff;
+    }
+
+    .mobile-project {
+        width: 100%;
+        min-height: 100dvh;
+        padding: 72px 18px 72px;
+        scroll-margin-top: 0;
+        border-bottom: 1px dotted rgba(254, 204, 255, 0.85);
+    }
+
+    .mobile-project-media-wrap {
+        width: 100%;
+        min-height: auto;
+        padding: 5px 0 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile-project-media {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        max-height: 78svh;
+        object-fit: contain;
+        background-color: transparent;
+        opacity: 1;
+        filter: none;
+        transform: none;
+    }
+
+    iframe.mobile-project-media {
+        height: calc((100vw - 36px) * 0.5625);
+        max-height: 78svh;
+        border: 0;
+    }
+
+    video.mobile-project-media {
+        height: auto;
+    }
+
+    .mobile-project-text {
+        max-width: 38rem;
+        margin: 0 auto;
+        padding-bottom: 4px;
+    }
+
+    .mobile-project-title,
+    .mobile-project-category,
+    .mobile-project-year,
+    .mobile-project-description {
+        font-family: "mrs-eaves-xl-serif-narrow", "Pretendard", serif;
+        color: #000;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
+    }
+
+    .mobile-project-title {
+        font-size: 1rem;
+        line-height: 1;
+        font-weight: 700;
+        color: #feccff;
+
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .mobile-project-category,
+    .mobile-project-year {
+        font-size: 1rem;
+        line-height: 1;
+        padding-bottom: 6px;
+    }
+
+    .mobile-project-year {
+        margin-bottom: 30px;
+    }
+
+    .mobile-project-description {
+        font-size: 0.9rem;
+        line-height: 1.3;
+        white-space: pre-wrap;
+        padding: 0;
+        background-color: #feccff;
+        opacity: 0.93;
+    }
+
+    .mobile-reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .mobile-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .button-col-11-2 {
+        display: flex !important;
+        position: fixed !important;
+        top: 12px !important;
+        right: 12px !important;
+        left: auto !important;
+        width: 48px !important;
+        height: 48px !important;
+        z-index: 9500;
+        background-color: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(6px);
+    }
+
+    .button-col-11-2::before {
+        content: "";
+        width: 24px;
+        height: 18px;
+        background:
+            linear-gradient(var(--magenta-line), var(--magenta-line)) 0 0 / 100% 2px no-repeat,
+            linear-gradient(var(--magenta-line), var(--magenta-line)) 0 8px / 100% 2px no-repeat,
+            linear-gradient(var(--magenta-line), var(--magenta-line)) 0 16px / 100% 2px no-repeat;
+    }
+
+    .button-col-11-2 .arrow {
+        display: none;
+    }
+
+    .button-col-11-2 .circular-button-item {
+        display: none;
+    }
+
+    .menu-overlay {
+        align-items: stretch;
+        background-color: rgba(254, 204, 255, 0.36);
+        padding: 14px;
+    }
+
+    .menu-content {
+        width: 100%;
+        height: auto;
+        max-height: calc(100dvh - 20px);
+        margin: auto 0;
+        padding: 0px 20px 50px 20px;
+        border: 1px solid var(--magenta-line);
+        overflow: hidden;
+    }
+
+    .menu-close {
+        top: 20px;
+        bottom: 20px;
+        right: 20px;
+        width: 34px;
+        height: 34px;
+        font-size: 31px;
+    }
+
+    .menu-project-list {
+        max-height: calc(100dvh - 104px);
+        overflow-y: auto;
+    }
+
+    .menu-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 13px 0;
+    }
+
+    .menu-item .m-title {
+        flex: 3;
+        /* 가로 공간을 1:1:1로 균등 배분 */
+        text-align: left;
+        /* 왼쪽 정렬 */
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .menu-item .m-category {
+        flex: 2;
+        /* 가로 공간을 1:1:1로 균등 배분 */
+        text-align: left;
+        /* 왼쪽 정렬 */
+        font-size: 0.9rem;
+    }
+
+    .menu-item .m-year {
+        flex: 1;
+        /* 가로 공간을 1:1:1로 균등 배분 */
+        text-align: right;
+        /* 오른쪽 정렬 */
+        font-size: 0.9rem;
+    }
+}
+
+/* 모바일 화살표 버튼 (웹 버전 .circular-button 스타일 상속 및 모바일 메뉴 버튼과 통일) */
+.circular-button.mobile-nav-btn {
+    display: flex !important;
+    /* 기존 모바일 미디어쿼리의 display: none !important 우회 */
+    position: fixed !important;
+    bottom: 50px !important;
+    /* 화면 하단 여백 (상단 메뉴 버튼의 12px 여백과 완벽 대칭) */
+    top: auto !important;
+    width: 48px !important;
+    /* 모바일 메뉴 버튼 크기(48px)와 일치 */
+    height: 48px !important;
+    z-index: 9500;
+    /* 모바일 메뉴 버튼과 동일한 레이어 높이 */
+    background-color: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(6px);
+}
+
+/* 왼쪽 화살표 배치 (좌측 여백 12px로 메뉴 버튼과 통일감 유지) */
+.circular-button.mobile-nav-btn.prev {
+    left: 12px !important;
+    right: auto !important;
+}
+
+/* 오른쪽 화살표 배치 (우측 여백 12px) */
+.circular-button.mobile-nav-btn.next {
+    right: 12px !important;
+    left: auto !important;
+}
+
+/* 모바일 화면 크기에 맞게 내부 화살표 이미지 비율 조정 */
+.circular-button.mobile-nav-btn .arrow {
+    display: block !important;
+    /* 기존 모바일 미디어쿼리의 arrow display: none 우회 */
+    width: 93% !important;
+    /* 48px 원형 버튼 내부에서 가장 균형감 있게 보이도록 여백 조정 */
+    height: auto !important;
 }
