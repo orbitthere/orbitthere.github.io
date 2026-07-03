@@ -8,26 +8,12 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://use.typekit.net/gue2igp.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="icon" href="/img/cat_icon.png">
 </head>
 
 <body>
-
-    <div id="pc-only-overlay">
-        <div class="pc-only-card">
-            <p class="main-text">
-                This website is best viewed on a desktop PC.<br>
-                You can check out my work on Instagram!<br><br>
-                (~˘▾˘)~ ♥ ~(˘▾˘~)<br><br>
-                <a href="https://www.instagram.com/post.syntax" target="_blank">
-                    @post.syntax
-                </a>
-                <br><br><br><br>
-                <img class="rat" src="/img/rat.gif">
-        </div>
-    </div>
-
     <div class="grid-container">
 
         <div class="grid-lines-overlay"></div>
@@ -36,7 +22,7 @@
 
         <header class="grid-row row-2">
             <div class="text-cell cell-2-1">graphic designer</div>
-            <div class="text-cell cell-2-2">based in seoul, korea >></div>
+            <div class="text-cell cell-2-2">based in seoul, korea >><br>currently in eindhoven, nl</div>
             <div class="text-cell cell-2-3">and worldwideweb</div>
 
             <div class="slogan-container col-4" data-col="4">
@@ -55,10 +41,8 @@
             </div>
 
             <div class="text-cell cell-2-7 contact-info">
-                <a href="mailto:awayfromdiscuss@gmail.com" target="_blank"
-                    style=" cursor:pointer;">awayfromdiscuss@gmail.com</a>
-                <a href="https://www.instagram.com/post.syntax" target="_blank" style=" cursor:pointer;">instagram
-                    *post.syntax*</a>
+                <a href="mailto:awayfromdiscuss@gmail.com" target="_blank">awayfromdiscuss@gmail.com</a>
+                <a href="https://www.instagram.com/post.syntax" target="_blank">instagram *post.syntax*</a>
             </div>
 
             <div class="text-cell cell-2-8 designer-name">
@@ -69,8 +53,7 @@
 
         <main class="grid-cell main-content">
 
-            <div class="back-shape"><img src="/img/back_shape.svg">
-            </div>
+            <div class="back-shape"><img src="/img/back_shape.svg" alt=""></div>
 
             <div class="project-info-container col-1">
                 <div class="project-title" id="p-title">No surfing club</div>
@@ -83,17 +66,17 @@
             </div>
 
             <div class="project-description-container">
-                <div class="description-text" id="p-description">
-                </div>
+                <div class="description-text" id="p-description"></div>
             </div>
 
             <div class="img-scroll-wrapper">
-                <div class="image-track" id="image-track">
-                </div>
+                <div class="image-track" id="image-track"></div>
             </div>
 
-            <div class="circular-button button-col-1" data-col="1">
-                <img class="arrow" src="/img/button_arrow/arrow_1.png">
+            <div id="mobile-project-feed" class="mobile-project-feed"></div>
+
+            <div class="circular-button button-col-1" data-col="1" aria-label="Previous project">
+                <img class="arrow" src="/img/button_arrow/arrow_1.png" alt="">
                 <div class="circular-button-item"></div>
             </div>
 
@@ -105,12 +88,12 @@
                 <div class="circular-button-item" id="total-num">10</div>
             </div>
 
-            <div class="circular-button button-col-11-1" data-col="11">
-                <img class="arrow" src="/img/button_arrow/arrow_2.png">
+            <div class="circular-button button-col-11-1" data-col="11" aria-label="Next project">
+                <img class="arrow" src="/img/button_arrow/arrow_2.png" alt="">
                 <div class="circular-button-item"></div>
             </div>
-            <div class="circular-button button-col-11-2" data-col="11">
-                <img class="arrow" src="/img/button_arrow/menu.png">
+            <div class="circular-button button-col-11-2" data-col="11" aria-label="Open project menu">
+                <img class="arrow" src="/img/button_arrow/menu.png" alt="">
                 <div class="circular-button-item"></div>
             </div>
 
@@ -129,9 +112,8 @@
 
     <div id="menu-overlay" class="menu-overlay">
         <div class="menu-content">
-            <div id="menu-close-btn" class="menu-close">×</div>
-            <div id="menu-project-list" class="menu-project-list">
-            </div>
+            <button id="menu-close-btn" class="menu-close" type="button" aria-label="Close project menu">×</button>
+            <div id="menu-project-list" class="menu-project-list"></div>
         </div>
     </div>
 
